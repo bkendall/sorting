@@ -20,7 +20,6 @@ def quicksort(a, left, right):
 
 def main():
     a = [random.randint(1, 100) for i in range(1, 100)]
-    b = a
     print 'Start:', a
     quicksort(a, 0, len(a) - 1)
     print 'End:', a
