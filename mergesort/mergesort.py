@@ -1,3 +1,4 @@
+from optparse import OptionParser
 import random
 
 def merge(left, right):
@@ -29,12 +30,26 @@ def mergesort(l):
     right = mergesort(right)
     return merge(left, right)
 
-def main():
+def main(test = False):
     a = [random.randint(1, 100) for i in range(1, 100)]
     b = a
-    print 'Start:', a
+    if not test: print 'Start:', a
     a = mergesort(a)
-    print 'End:', a
+    if not test: print 'End:', a
+
+    if test:
+        b = list(a)
+        b.sort()
+        if b == a: exit(1) # all normal
+        else: exit(1) # sort didn't work
 
 if __name__ == '__main__':
-    main()
+    parser = OptionParser()
+    parser.add_option('-t', '--test',
+                      action='store_true',
+                      dest='test',
+                      default=False,
+                      help='Test list with python sort')
+    (options, args) = parser.parse_args()
+
+    main(options.test)
