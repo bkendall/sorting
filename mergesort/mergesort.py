@@ -40,7 +40,7 @@ def main(test = False):
     if test:
         b = list(a)
         b.sort()
-        if b == a: exit(1) # all normal
+        if b == a: exit(0) # all normal
         else: exit(1) # sort didn't work
 
 if __name__ == '__main__':
