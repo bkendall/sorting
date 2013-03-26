@@ -1,3 +1,4 @@
+from optparse import OptionParser
 import random
 
 def seperate(v, n):
@@ -12,11 +13,25 @@ def bucketsort(a, n = 10):
     del a[:]
     for i in range(0, n): a.extend(buckets[i])
 
-def main():
+def main(test = False):
     a = [random.randint(1, 100) for i in range(0, 100)]
-    print 'Start:', a
+    if not test: print 'Start:', a
     bucketsort(a)
-    print 'End:', a
+    if not test: print 'End:', a
+
+    if test:
+        b = list(a)
+        b.sort()
+        if b == a: exit(0) # all normal
+        else: exit(1) # sort didn't work
 
 if __name__ == '__main__':
-    main()
+    parser = OptionParser()
+    parser.add_option('-t', '--test',
+                      action='store_true',
+                      dest='test',
+                      default=False,
+                      help='Test list with python sort')
+    (options, args) = parser.parse_args()
+
+    main(options.test)
